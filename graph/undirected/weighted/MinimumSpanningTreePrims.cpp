@@ -51,7 +51,6 @@ public:
 		priority_queue<vector<int>, vector<vector<int>>, Compare> pq;
 		vector<bool> visited(n, false);
 		visited[minimumWeightedEdge[0]] = true;
-		// pq.push(minimumWeightedEdge);
 		insertUnvisitedVertexConnectedToGivenVertex(minimumWeightedEdge[0], graph, visited, pq);
 		
 		int idealEdgeCount = n - 1, minimumSpanningTreeEdgeCount = 0;
