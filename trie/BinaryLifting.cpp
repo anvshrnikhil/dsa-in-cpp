@@ -24,7 +24,7 @@ void dfs(int node, int par = -1) {
     for(auto connNode : graph[node]) {
         if(connNode != par) {
             depth[connNode] = depth[node] + 1;
-            parent[connNode][0] = node;
+            parent[connNode][0] = node; // binary lifting store parent nodes
             dfs(connNode, node);
         }
     }
@@ -44,6 +44,7 @@ void prework(int n, vector<vector<int>> edges) {
 
     dfs(0);
 
+    //binary lifting logic to store parent nodes
     for(int i=1;i<k;i++) {
         for(int j=0;j<n;j++) {
             int par = parent[j][i-1];
@@ -60,7 +61,7 @@ int lca(int a, int b) {
 
     for(int i=0;i<k;i++) {
         if(diff & (1<<i)) {
-            a = parent[a][i];
+            a = parent[a][i]; // using binary lifting parent nodes
         }
     }
 
@@ -68,7 +69,7 @@ int lca(int a, int b) {
         return a;
 
     for(int i=k-1;i>=0;i--) {
-        if(parent[a][i] != parent[b][i]) {
+        if(parent[a][i] != parent[b][i]) { //using binary lifting parent nodes
             a = parent[a][i];
             b = parent[b][i];
         }
